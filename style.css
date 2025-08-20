@@ -42,8 +42,9 @@ canvas {
     left: 50px;
     width: 100px;
     height: 100px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 50%;
+    z-index: 9999;
 }
 
 #joystick-stick {
@@ -52,7 +53,7 @@ canvas {
     left: 25px;
     width: 50px;
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 1.0);
     border-radius: 50%;
 }
 

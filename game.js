@@ -3,6 +3,9 @@ const ctx = canvas.getContext('2d');
 
 const joystickContainer = document.getElementById('joystick-container');
 const joystickStick = document.getElementById('joystick-stick');
+if (!joystickContainer) {
+    alert('Error: joystickContainer not found!');
+}
 let joystickActive = false;
 let joystickStartX = 0;
 let joystickStartY = 0;
@@ -1367,6 +1370,7 @@ function resizeCanvas() {
 }
 
 function startGame() {
+    alert('startGame called');
     const nicknameInput = document.getElementById('nickname-input');
     const nickname = nicknameInput.value.trim();
 
@@ -1375,6 +1379,7 @@ function startGame() {
     init();
 
     joystickContainer.style.display = 'block'; // Added back
+    alert('Joystick display set to block!');
 
     // Force landscape mode
     if (screen.orientation && screen.orientation.lock) {
