@@ -1423,6 +1423,13 @@ function populateKeybindList() {
 window.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded event fired');
     document.getElementById('start-button').addEventListener('click', () => { console.log('Start button clicked'); startGame(); });
+    document.getElementById('fullscreen-button').addEventListener('click', () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.documentElement.requestFullscreen();
+        }
+    });
     settingsButton.addEventListener('click', openSettingsModal);
     closeSettingsBtn.addEventListener('click', closeSettingsModal);
     closePotionBtn.addEventListener('click', closePotionModal);
