@@ -3,9 +3,6 @@ const ctx = canvas.getContext('2d');
 
 const joystickContainer = document.getElementById('joystick-container');
 console.log('joystickContainer:', joystickContainer);
-if (!joystickContainer) {
-    alert('Error: joystickContainer not found!');
-}
 const joystickStick = document.getElementById('joystick-stick');
 let joystickActive = false;
 let joystickStartX = 0;
@@ -1381,7 +1378,16 @@ function startGame() {
 
     joystickContainer.style.display = 'block';
     console.log('joystickContainer display set to block');
-    alert('Joystick display set to block!');
+
+    // Force landscape mode
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function(error) {
+            console.error('Failed to lock orientation:', error);
+        });
+    } else {
+        console.warn('Screen Orientation API not supported.');
+    }
+
     if (nickname) {
         player.nickname = nickname;
     }
