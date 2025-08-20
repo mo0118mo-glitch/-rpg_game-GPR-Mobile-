@@ -3,6 +3,9 @@ const ctx = canvas.getContext('2d');
 
 const joystickContainer = document.getElementById('joystick-container');
 console.log('joystickContainer:', joystickContainer);
+if (!joystickContainer) {
+    alert('Error: joystickContainer not found!');
+}
 const joystickStick = document.getElementById('joystick-stick');
 let joystickActive = false;
 let joystickStartX = 0;
@@ -1378,6 +1381,7 @@ function startGame() {
 
     joystickContainer.style.display = 'block';
     console.log('joystickContainer display set to block');
+    alert('Joystick display set to block!');
     if (nickname) {
         player.nickname = nickname;
     }
