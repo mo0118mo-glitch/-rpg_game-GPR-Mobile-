@@ -8,7 +8,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px;
 }
 
 h1 {
@@ -26,6 +25,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    margin: 100px; /* Added margin */
 }
 
 canvas {
