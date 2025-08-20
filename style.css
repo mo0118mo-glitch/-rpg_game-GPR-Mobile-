@@ -2,18 +2,9 @@ html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-}
-
-body {
     background-color: #90EE90;
     color: #fff;
     font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding-top: 20px;
-    overflow: hidden;
 }
 
 h1 {
