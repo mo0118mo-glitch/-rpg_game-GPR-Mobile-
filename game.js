@@ -2,7 +2,6 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 const joystickContainer = document.getElementById('joystick-container');
-console.log('joystickContainer:', joystickContainer);
 const joystickStick = document.getElementById('joystick-stick');
 let joystickActive = false;
 let joystickStartX = 0;
@@ -1368,16 +1367,11 @@ function resizeCanvas() {
 }
 
 function startGame() {
-    console.log('startGame called');
     const nicknameInput = document.getElementById('nickname-input');
     const nickname = nicknameInput.value.trim();
 
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-wrapper').style.display = 'block';
     init();
-
-    joystickContainer.style.display = 'block';
-    console.log('joystickContainer display set to block');
 
     // Force landscape mode
     if (screen.orientation && screen.orientation.lock) {
@@ -1452,7 +1446,6 @@ function populateKeybindList() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded event fired');
     document.getElementById('start-button').addEventListener('click', () => { console.log('Start button clicked'); startGame(); });
     settingsButton.addEventListener('click', openSettingsModal);
     closeSettingsBtn.addEventListener('click', closeSettingsModal);
