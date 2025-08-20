@@ -2,6 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 const joystickContainer = document.getElementById('joystick-container');
+console.log('joystickContainer:', joystickContainer);
 const joystickStick = document.getElementById('joystick-stick');
 let joystickActive = false;
 let joystickStartX = 0;
@@ -1367,6 +1368,7 @@ function resizeCanvas() {
 }
 
 function startGame() {
+    console.log('startGame called');
     const nicknameInput = document.getElementById('nickname-input');
     const nickname = nicknameInput.value.trim();
 
@@ -1375,6 +1377,7 @@ function startGame() {
     init();
 
     joystickContainer.style.display = 'block';
+    console.log('joystickContainer display set to block');
     if (nickname) {
         player.nickname = nickname;
     }
