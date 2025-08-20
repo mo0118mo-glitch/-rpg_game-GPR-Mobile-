@@ -1,6 +1,14 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+const joystickContainer = document.getElementById('joystick-container');
+const joystickStick = document.getElementById('joystick-stick');
+let joystickActive = false;
+let joystickStartX = 0;
+let joystickStartY = 0;
+let joystickStickX = 0;
+let joystickStickY = 0;
+
 // --- 설정 ---
 const tileSize = 40;
 const MONSTER_RESPAWN_TIME = 10000;
@@ -1343,9 +1351,21 @@ function init() {
     player.y = (maps.overworld.layout.length / 2) * tileSize;
     currentMapId = 'overworld'; // Ensure map is overworld
     createOverworldBackground();
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
     spawnMonsters();
     gameLoop();
     updateUIText(); 
+}
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    camera.width = canvas.width;
+    camera.height = canvas.height;
+    if (typeof draw === 'function') {
+        draw(); // Redraw the canvas after resizing
+    }
 }
 
 function startGame() {
@@ -1356,6 +1376,7 @@ function startGame() {
     document.getElementById('game-wrapper').style.display = 'block';
     init();
 
+    joystickContainer.style.display = 'block';
     if (nickname) {
         player.nickname = nickname;
     }
@@ -1420,3 +1441,51 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+joystickContainer.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    joystickActive = true;
+    const touch = e.touches[0];
+    joystickStartX = joystickContainer.offsetLeft + joystickContainer.offsetWidth / 2;
+    joystickStartY = joystickContainer.offsetTop + joystickContainer.offsetHeight / 2;
+}, { passive: false });
+
+joystickContainer.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (!joystickActive) return;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - joystickStartX;
+    const deltaY = touch.clientY - joystickStartY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const maxDistance = 50; // Half of the joystick container size
+
+    let stickX = deltaX;
+    let stickY = deltaY;
+
+    if (distance > maxDistance) {
+        stickX = (deltaX / distance) * maxDistance;
+        stickY = (deltaY / distance) * maxDistance;
+    }
+
+    joystickStick.style.transform = `translate(${stickX}px, ${stickY}px)`;
+
+    // Update actionState based on joystick position
+    const angle = Math.atan2(deltaY, deltaX);
+    const threshold = Math.PI / 4;
+
+    actionState.up = (angle >= -Math.PI + threshold && angle <= -threshold);
+    actionState.down = (angle >= threshold && angle <= Math.PI - threshold);
+    actionState.left = (angle >= Math.PI - threshold || angle <= -Math.PI + threshold);
+    actionState.right = (angle >= -threshold && angle <= threshold);
+
+}, { passive: false });
+
+joystickContainer.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    joystickActive = false;
+    joystickStick.style.transform = 'translate(0, 0)';
+    actionState.up = false;
+    actionState.down = false;
+    actionState.left = false;
+    actionState.right = false;
+}, { passive: false });
