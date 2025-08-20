@@ -1363,9 +1363,6 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
     camera.width = canvas.width;
     camera.height = canvas.height;
-    if (typeof draw === 'function') {
-        draw(); // Redraw the canvas after resizing
-    }
 }
 
 function startGame() {
