@@ -58,15 +58,7 @@ canvas {
     border-radius: 50%;
 }
 
-.game-buttons-top-right {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 10; /* Ensure buttons are on top of canvas */
-}
+
 
 #fullscreen-button {
     font-size: 1.2em;
@@ -141,6 +133,11 @@ canvas {
 
 #settings-modal .modal-content {
     max-width: 270px;
+}
+
+.modal-content button {
+    margin-top: 10px;
+    width: 100%;
 }
 
 #shop-container {
@@ -237,16 +234,13 @@ canvas {
 /* Settings Modal Styles */
 #settings-modal {
     display: none; /* Hidden by default */
-    position: fixed; 
+    position: absolute; /* Changed from fixed to absolute */
     z-index: 101; /* Sit on top of start screen */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    /* left and top will be set by JS */
+    /* width and height will be determined by content */
     overflow: auto;
     background-color: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
+    /* Removed justify-content and align-items */
 }
 
 #settings-container {

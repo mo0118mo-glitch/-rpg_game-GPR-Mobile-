@@ -1396,7 +1396,28 @@ languageSelect.addEventListener('change', (e) => {
 
 function openSettingsModal() {
     populateKeybindList();
+
+    // Calculate player's screen coordinates
+    const playerScreenX = player.x - camera.x;
+    const playerScreenY = player.y - camera.y;
+
+    // Position the modal above the player
+    settingsModal.style.position = 'absolute';
+    settingsModal.style.left = `${playerScreenX}px`;
+    settingsModal.style.top = `${playerScreenY}px`;
+    settingsModal.style.transform = 'translate(-50%, -100%)'; // Center above player
+
     settingsModal.style.display = 'flex';
+
+    // Attach event listeners for buttons inside the modal
+    document.getElementById('fullscreen-button').addEventListener('click', () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.documentElement.requestFullscreen();
+        }
+    });
+    document.getElementById('return-to-town-button').addEventListener('click', startReturnToTown);
 }
 
 function closeSettingsModal() {
@@ -1423,18 +1444,10 @@ function populateKeybindList() {
 window.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded event fired');
     document.getElementById('start-button').addEventListener('click', () => { console.log('Start button clicked'); startGame(); });
-    document.getElementById('fullscreen-button').addEventListener('click', () => {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            document.documentElement.requestFullscreen();
-        }
-    });
     settingsButton.addEventListener('click', openSettingsModal);
     closeSettingsBtn.addEventListener('click', closeSettingsModal);
     closePotionBtn.addEventListener('click', closePotionModal);
     closeSkillBtn.addEventListener('click', closeSkillModal);
-    document.getElementById('return-to-town-button').addEventListener('click', startReturnToTown); // New line
 
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
