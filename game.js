@@ -1443,9 +1443,9 @@ window.addEventListener('DOMContentLoaded', () => {
 joystickContainer.addEventListener('touchstart', (e) => {
     e.preventDefault();
     joystickActive = true;
-    const touch = e.touches[0];
-    joystickStartX = joystickContainer.offsetLeft + joystickContainer.offsetWidth / 2;
-    joystickStartY = joystickContainer.offsetTop + joystickContainer.offsetHeight / 2;
+    const rect = joystickContainer.getBoundingClientRect();
+    joystickStartX = rect.left + rect.width / 2;
+    joystickStartY = rect.top + rect.height / 2;
 }, { passive: false });
 
 joystickContainer.addEventListener('touchmove', (e) => {
