@@ -1421,7 +1421,8 @@ function populateKeybindList() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('start-button').addEventListener('click', startGame);
+    console.log('DOMContentLoaded event fired');
+    document.getElementById('start-button').addEventListener('click', () => { console.log('Start button clicked'); startGame(); });
     settingsButton.addEventListener('click', openSettingsModal);
     closeSettingsBtn.addEventListener('click', closeSettingsModal);
     closePotionBtn.addEventListener('click', closePotionModal);
