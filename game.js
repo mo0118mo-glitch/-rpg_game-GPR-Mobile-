@@ -1371,7 +1371,10 @@ function startGame() {
     const nickname = nicknameInput.value.trim();
 
     document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('game-wrapper').style.display = 'block'; // Added back
     init();
+
+    joystickContainer.style.display = 'block'; // Added back
 
     // Force landscape mode
     if (screen.orientation && screen.orientation.lock) {
